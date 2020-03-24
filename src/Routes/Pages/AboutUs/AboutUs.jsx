@@ -1,14 +1,9 @@
 import React from 'react';
-import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
-import CameraIcon from '@material-ui/icons/PhotoCamera';
 import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
-import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
@@ -64,7 +59,6 @@ const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 export default function Album() {
     const classes = useStyles();
-
     return (
         <React.Fragment>
             <main>
@@ -75,7 +69,7 @@ export default function Album() {
                             What is Virus Scope?
                         </Typography>
                         <Typography variant="h5" align="center" color="textSecondary" paragraph>
-                            VirusScope aims to help users check their travel history against a crowd-sourced database of infected users. We continue to monitor, ideally to notify users if they were in contact with infected users and seek immediate help before any symptoms are presented.
+                            Virus Scope aims to help users check their travel history against a crowd-sourced database of infected users. We continue to monitor, ideally to notify users if they were in contact with infected users and seek immediate help before any symptoms are presented.
                         </Typography>
                         <div className={classes.heroButtons}>
                             <Grid container spacing={2} justify="center">
@@ -126,7 +120,7 @@ export default function Album() {
                     Made with {'<3'} for the world
                 </Typography>
                 <Typography variant="subtitle1" align="center" color="textSecondary" component="p">
-                    Something here to give the footer a purpose!
+                    Crowd-sourced data remains anonymous after upload. More information.
                 </Typography>
                 <Copyright />
             </footer>

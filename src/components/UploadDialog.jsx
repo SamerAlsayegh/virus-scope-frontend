@@ -7,8 +7,10 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import TextField from "@material-ui/core/TextField";
 import DialogActions from "@material-ui/core/DialogActions";
-import {useFormik} from "formik";
 import {DropzoneArea} from "material-ui-dropzone";
+import {useFormik} from "formik";
+import RequestService from "../services/Request";
+import fs from "fs";
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -25,18 +27,66 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-export default function App() {
+export default function UploadDialog({isCheck = false, setKeyLocations}) {
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
+
+
+    async function readFileAsDataURL(file) {
+        let result_base64 = await new Promise((resolve) => {
+            let fileReader = new FileReader();
+            fileReader.onload = (e) => resolve(e.target.result);
+            fileReader.readAsText(file);
+        });
+        return result_base64;
+    }
+
 
     const formik = useFormik({
         initialValues: {
             name: 'My Name',
             files: []
         },
-        onSubmit: values => {
+        onSubmit: async (values) => {
             console.log(values);
-            alert(JSON.stringify(values, null, 2));
+            let files = await Promise.all(values.files.map(async file => {
+                return await readFileAsDataURL(file);
+            }));
+            console.log(files);
+
+            if (isCheck) {
+                try {
+                    let res = await Promise.all(files.map(file => {
+                        return RequestService.post('location/check', {
+                            file
+                        });
+                    }));
+                    let fullArray = [];
+
+                    res.forEach((res => {
+                        fullArray = fullArray.concat(res.data)
+                    }));
+
+                    setKeyLocations(fullArray)
+                    handleClose();
+                } catch ({message}) {
+                    alert(message)
+                }
+            } else {
+                try {
+                    await Promise.all(files.map(file => {
+                        return RequestService.post('location/add', {
+                            name: values.name,
+                            file
+                        });
+                    }));
+                    handleClose();
+                } catch ({message}) {
+                    alert(message)
+                }
+            }
+
+
         },
     });
 
@@ -49,7 +99,7 @@ export default function App() {
         setOpen(false);
     };
 
-    const handleChange = (files) => {
+    const handleChange = async (files) => {
         console.log(files);
         formik.setFieldValue('files', files, true)
     };
@@ -57,7 +107,7 @@ export default function App() {
 
     return (<div>
         <Button variant="outlined" color="inherit" onClick={handleClickOpen}>
-            Start Compare
+            {isCheck ? 'Start Compare' : 'Add Patient Data'}
         </Button>
         <Dialog fullWidth maxWidth={'md'} open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
             <DialogTitle id="form-dialog-title">Data Upload</DialogTitle>
