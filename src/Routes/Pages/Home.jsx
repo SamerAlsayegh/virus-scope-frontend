@@ -1,6 +1,8 @@
 import React from 'react';
 
 export default () => {
-    return <div>This is the home component</div>
+    return <div>
+        Step by Step instructions here...
+    </div>
 }
 

@@ -10,6 +10,8 @@ import DialogActions from "@material-ui/core/DialogActions";
 import {DropzoneArea} from "material-ui-dropzone";
 import {useFormik} from "formik";
 import RequestService from "../services/Request";
+import MuiAlert from '@material-ui/lab/Alert';
+
 import fs from "fs";
 
 const useStyles = makeStyles(theme => ({
@@ -105,19 +107,22 @@ export default function UploadDialog({isCheck = false, setKeyLocations}) {
     };
 
 
+    function Alert(props) {
+        return <MuiAlert elevation={6} variant="filled" {...props} />;
+    }
+
+
     return (<div>
         <Button variant="outlined" color="inherit" onClick={handleClickOpen}>
             {isCheck ? 'Start Compare' : 'Add Patient Data'}
         </Button>
         <Dialog fullWidth maxWidth={'md'} open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-            <DialogTitle id="form-dialog-title">Data Upload</DialogTitle>
+            <DialogTitle id="form-dialog-title">{!isCheck ? 'Virus Case Data Upload' : 'Data Check' }</DialogTitle>
             <form onSubmit={formik.handleSubmit}>
 
                 <DialogContent>
-                    <DialogContentText>
-                        Upload your data
-                    </DialogContentText>
-                    <TextField
+                    {!isCheck && <Alert severity="warning">Data is being uploaded for patient storage, you agree that any data added may be stored for future reference.</Alert>}
+                    {!isCheck && <TextField
                         id="name"
                         name="name"
                         type="text"
@@ -128,7 +133,7 @@ export default function UploadDialog({isCheck = false, setKeyLocations}) {
                         fullWidth
                         error={formik.touched.name && formik.errors.name}
                         onChange={formik.handleChange}
-                    />
+                    />}
                     <DropzoneArea
 
                         acceptedFiles={["application/json"]}

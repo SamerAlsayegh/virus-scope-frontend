@@ -1,5 +1,5 @@
 import Home from "./Pages/Home";
-import AboutUs from "./Pages/AboutUs/AboutUs";
+import AboutUs from "./Pages/AboutUs";
 import MapView from "./Pages/MapView/MapView";
 
 
