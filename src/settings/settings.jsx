@@ -1,9 +1,11 @@
 const dev = {
-    api: 'http://localhost:8000/api',
+    // api: 'http://ec2-18-218-128-107.us-east-2.compute.amazonaws.com:8001/api',
+    api: 'http://localhost:8001/api',
+
 };
 
 const prod = {
-    api: 'http://localhost:8000/api',
+    api: 'http://ec2-18-218-128-107.us-east-2.compute.amazonaws.com:8001/api',
 
 };
 

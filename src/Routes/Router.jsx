@@ -1,14 +1,10 @@
-import Home from "./Pages/Home";
-import AboutUs from "./Pages/AboutUs";
-import MapView from "./Pages/MapView/MapView";
+import Home from "../interfaces/Public/Home";
+import AboutUs from "../interfaces/Public/AboutUs";
+import MapView from "../interfaces/Public/MapView/MapView";
+import ClientWrapper from "../interfaces/ClientWrapper";
 
 
 export default [
-    {
-        path: "/",
-        exact: true,
-        component: Home
-    },
     {
         path: "/about-us",
         component: AboutUs
@@ -17,5 +13,10 @@ export default [
         path: "/map-view",
         component: MapView
     },
+    {
+        component: ClientWrapper
+    },
+
+
 ]
 

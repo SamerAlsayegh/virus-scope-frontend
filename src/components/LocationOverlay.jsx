@@ -137,7 +137,10 @@ export default function LocationOverlay({PreExpandedPanels = [], currentLocation
                 <CardContent>
                     <Typography variant="body2" color="textSecondary" component="p">
                         Interacted with: <b>{currentLocationAddress.interactWith}</b> <br/>
-                        Interacted for: <b>{moment.utc(currentLocationAddress.duration).format(currentLocationAddress.duration < (1000 * 60 * 60) ? "mm [minutes] [and] ss [seconds]" : "hh [hours], mm [minutes] [and] ss [seconds]")}</b>
+                        Interacted for: <b>{
+                        currentLocationAddress.duration === 0 ? 'instantly' :
+                            moment.utc(currentLocationAddress.duration).format(currentLocationAddress.duration < (1000 * 60 * 60) ? "mm [minutes] [and] ss [seconds]" : "hh [hours], mm [minutes] [and] ss [seconds]")
+                        }</b>
                     </Typography>
 
                 </CardContent>

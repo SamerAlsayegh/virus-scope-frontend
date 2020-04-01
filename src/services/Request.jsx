@@ -38,7 +38,7 @@ const RequestService = {
                 .then((res) => {
                     console.log(res);
                     if (res && !res.status) throw new Error('Network Error');
-                    if (!fullResponse) resolve((res.data && res.data.result ) || res.data);
+                    if (!fullResponse) resolve(res.data.data);
                     else resolve(res);
                 }).catch(err => {
                     console.log(err);
