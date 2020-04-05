@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/styles';
 import { Typography } from '@material-ui/core';
+import {useSelector} from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
   root: {},
@@ -24,9 +25,8 @@ const useStyles = makeStyles((theme) => ({
 
 function Header({ className, ...rest }) {
   const classes = useStyles();
-  const data = {
-    name: 'Shen Zhi'
-  };
+  const {user} = useSelector(state => state.user);
+
 
   return (
     <div
@@ -47,7 +47,7 @@ function Header({ className, ...rest }) {
       >
         Good Morning,
         {' '}
-        {data.name}
+        {user.name}
       </Typography>
       <Typography variant="subtitle1">
         Here&apos;s what&apos;s happening

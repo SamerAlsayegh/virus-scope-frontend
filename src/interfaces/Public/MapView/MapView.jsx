@@ -39,7 +39,7 @@ export default (props) => {
 
         setData(mapKeyLocations);
         console.log(mapKeyLocations);
-    }, [mapKeyLocations]);
+    }, [mapKeyLocations, DataFilter]);
 
 
     useEffect(() => {

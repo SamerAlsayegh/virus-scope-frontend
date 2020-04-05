@@ -13,6 +13,8 @@ import RequestService from "../../services/Request";
 import MuiAlert from '@material-ui/lab/Alert';
 
 import fs from "fs";
+import {useDispatch} from "react-redux";
+import {uploadCheckData, uploadPatientData} from "../../redux/mapKeyLocations/actions";
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -29,8 +31,10 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-export default function UploadDialog({isCheck = false, setKeyLocations}) {
+export default function UploadDialog({isCheck = false}) {
     const classes = useStyles();
+    const dispatch = useDispatch();
+
     const [open, setOpen] = React.useState(false);
 
 
@@ -46,7 +50,7 @@ export default function UploadDialog({isCheck = false, setKeyLocations}) {
 
     const formik = useFormik({
         initialValues: {
-            name: 'My Name',
+            patient: 'My Name',
             files: []
         },
         onSubmit: async (values) => {
@@ -58,30 +62,14 @@ export default function UploadDialog({isCheck = false, setKeyLocations}) {
 
             if (isCheck) {
                 try {
-                    let res = await Promise.all(files.map(file => {
-                        return RequestService.post('location/check', {
-                            file
-                        });
-                    }));
-                    let fullArray = [];
-
-                    res.forEach((res => {
-                        fullArray = fullArray.concat(res.data)
-                    }));
-
-                    setKeyLocations(fullArray)
+                    await dispatch(uploadCheckData(files))
                     handleClose();
                 } catch ({message}) {
                     alert(message)
                 }
             } else {
                 try {
-                    await Promise.all(files.map(file => {
-                        return RequestService.post('location/add', {
-                            name: values.name,
-                            file
-                        });
-                    }));
+                    await dispatch(uploadPatientData(values.patient, files))
                     handleClose();
                 } catch ({message}) {
                     alert(message)
@@ -123,15 +111,15 @@ export default function UploadDialog({isCheck = false, setKeyLocations}) {
                 <DialogContent>
                     {!isCheck && <Alert severity="warning">Data is being uploaded for patient storage, you agree that any data added may be stored for future reference.</Alert>}
                     {!isCheck && <TextField
-                        id="name"
-                        name="name"
+                        id="patient"
+                        name="patient"
                         type="text"
-                        label={'Name'}
+                        label={'Patient ID'}
                         style={{
                             paddingBottom: 10
                         }}
                         fullWidth
-                        error={formik.touched.name && formik.errors.name}
+                        error={formik.touched.patient && formik.errors.patient}
                         onChange={formik.handleChange}
                     />}
                     <DropzoneArea

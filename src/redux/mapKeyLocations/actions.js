@@ -12,7 +12,7 @@ export const uploadCheckData = (files) => (dispatch) => {
         let fullArray = [];
 
         res.forEach((res => {
-            fullArray = fullArray.concat(res.data)
+            fullArray = fullArray.concat(res)
         }));
         dispatch({type: constants.CHECK_KEY_LOCATIONS_SUCCESS, data: fullArray});
     }, (err) => {
@@ -21,19 +21,19 @@ export const uploadCheckData = (files) => (dispatch) => {
 };
 
 
-export const uploadPatientData = (name, files) => (dispatch) => {
+export const uploadPatientData = (patient, files) => (dispatch) => {
     dispatch({type: constants.UPLOAD_KEY_LOCATIONS_REQUEST})
 
     Promise.all(files.map(file => {
         return RequestService.post('location/add', {
-            name,
+            patient,
             file
         });
     })).then(res => {
         let fullArray = [];
 
         res.forEach((res => {
-            fullArray = fullArray.concat(res.data)
+            fullArray = fullArray.concat(res)
         }));
         dispatch({type: constants.UPLOAD_KEY_LOCATIONS_SUCCESS});
     }, (err) => {

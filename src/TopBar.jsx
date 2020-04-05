@@ -79,7 +79,7 @@ export default function TopBar() {
 
             <Typography variant="h4" className={classes.title}>
                 <Hidden xsDown>
-                    Virus Scope
+                    Virus Trip
                 </Hidden>
             </Typography>
             {/*<Button color="inherit">Login</Button>*/}
@@ -95,13 +95,7 @@ export default function TopBar() {
                         <Icon>help</Icon>
                     </IconButton>
                 </Link>
-                <Link
-                    to={'/map-view'}
-                    style={{textDecoration: 'none', color: 'inherit'}}>
-                    <IconButton aria-label="display more actions" edge="end" color="inherit">
-                        <Icon>explore</Icon>
-                    </IconButton>
-                </Link>
+
                 {!user && <>
                     <Hidden mdUp style={{marginLeft: 0}}>
 
@@ -124,7 +118,13 @@ export default function TopBar() {
                     </Hidden>
                 </>}
                 {user && <>
-
+                    <Link
+                        to={'/map-view'}
+                        style={{textDecoration: 'none', color: 'inherit'}}>
+                        <IconButton aria-label="display more actions" edge="end" color="inherit">
+                            <Icon>explore</Icon>
+                        </IconButton>
+                    </Link>
                     <Button
 
                         style={{marginLeft: 10}}
@@ -152,7 +152,7 @@ export default function TopBar() {
                         open={open}
                         onClose={handleClose}
                     >
-                        <Link to="/settings" style={{ textDecoration: 'none', display: 'block' }}>
+                        <Link to="/settings/general" style={{ textDecoration: 'none', display: 'block' }}>
                             <MenuItem>
                                 My account
                             </MenuItem>
