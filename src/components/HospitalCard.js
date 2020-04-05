@@ -21,7 +21,7 @@ import {
 import ShareIcon from '@material-ui/icons/Share';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
-import getInitials from 'src/utils/getInitials';
+import getInitials from 'utils/getInitials';
 import Label from 'components/Label';
 
 const useStyles = makeStyles((theme) => ({
@@ -58,17 +58,8 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-function ProjectCard({ project, className, ...rest }) {
+function HospitalCard({ hospital, className, ...rest }) {
   const classes = useStyles();
-  const [liked, setLiked] = useState(project.liked);
-
-  const handleLike = () => {
-    setLiked(true);
-  };
-
-  const handleUnlike = () => {
-    setLiked(false);
-  };
 
   return (
     <Card
@@ -79,39 +70,37 @@ function ProjectCard({ project, className, ...rest }) {
         avatar={(
           <Avatar
             alt="Author"
-            src={project.author.avatar}
+            src={hospital.avatar}
           >
-            {getInitials(project.author.name)}
+            {getInitials(hospital.name)}
           </Avatar>
         )}
         className={classes.header}
         disableTypography
         subheader={(
           <Typography variant="body2">
-            by
-            {' '}
             <Link
               color="textPrimary"
               component={RouterLink}
               to="/profile/1/timeline"
               variant="h6"
             >
-              {project.author.name}
+              {hospital.address}
             </Link>
             {' '}
-            | Updated:
+            |
             {' '}
-            {moment(project.updated_at).fromNow()}
+            {hospital.centerType}
           </Typography>
         )}
         title={(
           <Link
             color="textPrimary"
             component={RouterLink}
-            to="/projects/1/overview"
+            to="/hospitals/1/overview"
             variant="h5"
           >
-            {project.title}
+            {hospital.name}
           </Link>
         )}
       />
@@ -121,17 +110,15 @@ function ProjectCard({ project, className, ...rest }) {
             color="textSecondary"
             variant="subtitle2"
           >
-            We&apos;re looking for experienced Developers and Product Designers to
-            come aboard and help us build succesful businesses through software.
+            {hospital.description}
           </Typography>
         </div>
         <div className={classes.tags}>
-          {project.tags.map((tag) => (
+          {hospital.services.map((tag) => (
             <Label
-              color={tag.color}
-              key={tag.text}
+              key={tag}
             >
-              {tag.text}
+              {tag}
             </Label>
           ))}
         </div>
@@ -139,63 +126,24 @@ function ProjectCard({ project, className, ...rest }) {
         <div className={classes.details}>
           <Grid
             alignItems="center"
+            alignContent={'center'}
             container
-            justify="space-between"
+            // justify="center"
             spacing={3}
           >
-            <Grid item>
+            <Grid item xs={6}>
               <Typography variant="h5">
-                $
-                {project.price}
+                {hospital.phoneNumber}
               </Typography>
-              <Typography variant="body2">Per Project</Typography>
+              <Typography variant="body2">Contact #</Typography>
             </Grid>
-            <Grid item>
-              <Typography variant="h5">{project.location}</Typography>
-              <Typography variant="body2">Location</Typography>
+            <Grid item xs={6}>
+              <Typography variant="h5">{hospital.manager}</Typography>
+              <Typography variant="body2">Manager</Typography>
             </Grid>
-            <Grid item>
-              <Typography variant="h5">{project.type}</Typography>
-              <Typography variant="body2">Type</Typography>
-            </Grid>
-            <Grid item>
-              {liked ? (
-                <Tooltip title="Unlike">
-                  <IconButton
-                    className={classes.likedButton}
-                    onClick={handleUnlike}
-                    size="small"
-                  >
-                    <FavoriteIcon />
-                  </IconButton>
-                </Tooltip>
-              ) : (
-                <Tooltip title="Like">
-                  <IconButton
-                    className={classes.likeButton}
-                    onClick={handleLike}
-                    size="small"
-                  >
-                    <FavoriteBorderIcon />
-                  </IconButton>
-                </Tooltip>
-              )}
-              <Tooltip title="Share">
-                <IconButton
-                  className={classes.shareButton}
-                  size="small"
-                >
-                  <ShareIcon />
-                </IconButton>
-              </Tooltip>
-              <Button
-                className={classes.learnMoreButton}
-                component={RouterLink}
-                size="small"
-                to="/projects/1/overview"
-              >
-                Learn more
-              </Button>
+            <Grid item xs={12}>
+              <Typography variant="h5">{hospital.emailAddress}</Typography>
+              <Typography variant="body2">Email</Typography>
             </Grid>
           </Grid>
         </div>
@@ -204,9 +152,9 @@ function ProjectCard({ project, className, ...rest }) {
   );
 }
 
-ProjectCard.propTypes = {
+HospitalCard.propTypes = {
   className: PropTypes.string,
-  project: PropTypes.object.isRequired
+  hospital: PropTypes.object.isRequired
 };
 
-export default ProjectCard;
+export default HospitalCard;

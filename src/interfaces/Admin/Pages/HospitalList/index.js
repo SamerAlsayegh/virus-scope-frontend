@@ -22,21 +22,21 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-function ProjectList() {
+function HospitalList() {
   const classes = useStyles();
 
   return (
     <Page
       className={classes.root}
-      title="Projects List"
+      title="Hospital List"
     >
       <Container maxWidth="lg">
         <Header className={classes.header} />
-        <Filter className={classes.filter} />
+        {/*<Filter className={classes.filter} />*/}
         <Results className={classes.results} />
       </Container>
     </Page>
   );
 }
 
-export default ProjectList;
+export default HospitalList;

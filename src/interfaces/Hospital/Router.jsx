@@ -1,6 +1,9 @@
-import Dashboard from "./Pages/Dashboard";
+import DashboardAnalytics from "./Pages/Dashboard/DashboardAnalytics";
 import Home from "./Pages/Home";
 import Error404 from "../Errors/Error404";
+import Settings from "./Pages/Settings";
+import PatientList from "./Pages/PatientList";
+import DashboardDefault from "./Pages/Dashboard/Default";
 
 
 export default [
@@ -11,16 +14,16 @@ export default [
     },
     {
         path: "/dashboard",
-        component: Dashboard
+        component: DashboardDefault
     },
     {
         path: "/analytics",
-        component: Dashboard
+        component: DashboardAnalytics
     },
     {
         path: `/management/patients`,
         exact: true,
-        component: Home
+        component: PatientList
     },
     {
         path: `/management/patients/new`,
@@ -28,19 +31,9 @@ export default [
         component: Home
     },
     {
-        path: `/settings`,
+        path: "/settings/:tab",
         exact: true,
-        component: Home
-    },
-    {
-        path: `/settings/general`,
-        exact: true,
-        component: Home
-    },
-    {
-        path: `/settings/security`,
-        exact: true,
-        component: Home
+        component: Settings
     },
     {
         component: Error404

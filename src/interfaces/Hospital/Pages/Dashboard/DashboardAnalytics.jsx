@@ -7,7 +7,7 @@ import {
     TotalProfit,
     TotalUsers,
     UsersByDevice
-} from "../../../views/Dashboard/components";
+} from "../../../../views/Dashboard/components";
 
 export default () => {
     return <div >

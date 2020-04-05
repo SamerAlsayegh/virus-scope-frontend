@@ -1,14 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/styles';
 import { Container } from '@material-ui/core';
-import axios from 'utils/axios';
 import Page from 'components/Page';
 import SearchBar from 'components/SearchBar';
 import Header from './Header';
 import Results from './Results';
+import PatientService from "../../../../services/Patient";
+import {getPatients} from "../../../../redux/patients/actions";
+import {useDispatch, useSelector} from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
-  root: {
+  root: {},
+  container: {
     paddingTop: theme.spacing(3),
     paddingBottom: theme.spacing(3)
   },
@@ -17,27 +20,14 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-function CustomerManagementList() {
+function DataList() {
   const classes = useStyles();
-  const [customers, setCustomers] = useState([]);
-
-  const handleFilter = () => {};
-
-  const handleSearch = () => {};
+  const dispatch = useDispatch();
+  const {patients} = useSelector(state => state.patients);
 
   useEffect(() => {
     let mounted = true;
-
-    const fetchCustomers = () => {
-      axios.get('/api/management/customers').then((response) => {
-        if (mounted) {
-          setCustomers(response.data.customers);
-        }
-      });
-    };
-
-    fetchCustomers();
-
+    dispatch(getPatients())
     return () => {
       mounted = false;
     };
@@ -46,23 +36,21 @@ function CustomerManagementList() {
   return (
     <Page
       className={classes.root}
-      title="Customer Management List"
+      title="Data List"
     >
-      <Container maxWidth={false}>
+      <Container
+        maxWidth={false}
+        className={classes.container}
+      >
         <Header />
-        <SearchBar
-          onFilter={handleFilter}
-          onSearch={handleSearch}
+        <SearchBar />
+        <Results
+          className={classes.results}
+          patients={patients}
         />
-        {customers && (
-          <Results
-            className={classes.results}
-            customers={customers}
-          />
-        )}
       </Container>
     </Page>
   );
 }
 
-export default CustomerManagementList;
+export default DataList;

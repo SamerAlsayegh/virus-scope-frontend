@@ -29,7 +29,8 @@ function Security({ className, ...rest }) {
   const classes = useStyles();
   const [values, setValues] = useState({
     password: '',
-    confirm: ''
+    newPassword: '',
+    newPasswordConfirm: ''
   });
 
   const handleChange = (event) => {
@@ -39,7 +40,7 @@ function Security({ className, ...rest }) {
     });
   };
 
-  const valid = values.password && values.password === values.confirm;
+  const valid = values.newPassword && values.newPassword === values.newPasswordConfirm;
 
   return (
     <Card
@@ -55,6 +56,22 @@ function Security({ className, ...rest }) {
             spacing={3}
           >
             <Grid
+                item
+                md={4}
+                sm={6}
+                xs={12}
+            >
+              <TextField
+                  fullWidth
+                  label="Current Password"
+                  name="currentPassword"
+                  onChange={handleChange}
+                  type="password"
+                  value={values.currentPassword}
+                  variant="outlined"
+              />
+            </Grid>
+            <Grid
               item
               md={4}
               sm={6}
@@ -62,11 +79,11 @@ function Security({ className, ...rest }) {
             >
               <TextField
                 fullWidth
-                label="Security"
-                name="password"
+                label="New Password"
+                name="newPassword"
                 onChange={handleChange}
                 type="password"
-                value={values.password}
+                value={values.newPassword}
                 variant="outlined"
               />
             </Grid>
@@ -79,10 +96,10 @@ function Security({ className, ...rest }) {
               <TextField
                 fullWidth
                 label="Confirm password"
-                name="confirm"
+                name="newPasswordConfirm"
                 onChange={handleChange}
                 type="password"
-                value={values.confirm}
+                value={values.newPasswordConfirm}
                 variant="outlined"
               />
             </Grid>

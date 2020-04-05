@@ -4,7 +4,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import UploadDialog from "./components/Dialogs/UploadDialog";
-import {Link} from "react-router-dom";
+import {Link, useHistory} from "react-router-dom";
 import IconButton from "@material-ui/core/IconButton";
 import Icon from "@material-ui/core/Icon";
 import Button from "@material-ui/core/Button";
@@ -13,13 +13,14 @@ import LoginDialog from "./components/Dialogs/LoginDialog";
 import {Chart} from 'react-chartjs-2';
 import validators from './common/validators';
 import validate from 'validate.js';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 
 import {chartjs} from './helpers';
 // import 'react-perfect-scrollbar/dist/css/styles.css';
 import './assets/scss/index.scss';
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
+import {logout} from "./redux/session/actions";
 
 
 const useStyles = makeStyles(theme => ({
@@ -45,6 +46,8 @@ validate.validators = {
 
 export default function TopBar() {
     const classes = useStyles();
+    const dispatch = useDispatch();
+    const history = useHistory();
     const {user, fetchingUser, fetchingUserError} = useSelector(state => state.user);
     const [KeyLocations, setKeyLocations] = useState([]);
     const [anchorEl, setAnchorEl] = useState(null);
@@ -58,6 +61,12 @@ export default function TopBar() {
     const handleClose = () => {
         setAnchorEl(null);
     };
+
+    const logoutUser = () => {
+        dispatch(logout())
+        setAnchorEl(null);
+        history.push('/')
+    }
 
 
     return <AppBar position="fixed" variant={'elevation'} square style={{height: 65}}>
@@ -126,7 +135,7 @@ export default function TopBar() {
                         onClick={handleMenu}
                         startIcon={<Icon>account_circle</Icon>}
                     >
-                        Samer
+                        {user.name}
                     </Button>
                     <Menu
                         id="menu-appbar"
@@ -143,8 +152,12 @@ export default function TopBar() {
                         open={open}
                         onClose={handleClose}
                     >
-                        <MenuItem onClick={handleClose}>Profile</MenuItem>
-                        <MenuItem onClick={handleClose}>My account</MenuItem>
+                        <Link to="/settings" style={{ textDecoration: 'none', display: 'block' }}>
+                            <MenuItem>
+                                My account
+                            </MenuItem>
+                        </Link>
+                        <MenuItem onClick={logoutUser}>Logout</MenuItem>
                     </Menu>
                 </>}
             </div>

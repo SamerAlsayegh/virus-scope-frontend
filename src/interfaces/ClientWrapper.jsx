@@ -12,14 +12,8 @@ import {getUser} from "../redux/user/actions";
 import {useHistory} from "react-router";
 
 export default () => {
-    const dispatch = useDispatch();
     const history = useHistory();
-    const {user, fetchingUser, fetchingUserError} = useSelector(state => state.user);
-
-
-    useEffect(() => {
-        dispatch(getUser());
-    }, []);
+    const {user} = useSelector(state => state.user);
 
     const publicFallbackRoutes = [
         {
@@ -29,12 +23,8 @@ export default () => {
         },
     ];
 
-
     function getActiveWrapper() {
-        if (fetchingUser) return <div>Loading...</div>
-
-
-        let scope = 'user'//user && user.scope;
+        let scope = user && user.scope;
         if (scope === 'admin') return <AdminWrapper/>;
         else if (scope === 'hospital') return <HospitalWrapper/>;
         else if (scope === 'user') return <UserWrapper/>;

@@ -41,7 +41,7 @@ export default [
             href: '/data/add'
           },
           {
-            title: 'Data List',
+            title: 'Infection Encounters',
             href: '/data',
             label: () => <Label color={colors.blue['500']}>100</Label>
           }

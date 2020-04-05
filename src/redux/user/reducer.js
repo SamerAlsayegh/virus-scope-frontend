@@ -3,7 +3,7 @@ import constants from "./constants"
 const initialState = {
 
   // Login Actions
-  fetchingUser: false,
+  fetchingUser: true,
   fetchingUserError: null,
   user: null,
 
@@ -19,7 +19,7 @@ export default (state = initialState, action) => {
   switch (action.type) {
     case constants.USER_GET_REQUEST: {
       return {
-        ...initialState,
+        ...state,
         fetchingUser: true,
         fetchingUserError: null,
         user: null,
@@ -27,7 +27,7 @@ export default (state = initialState, action) => {
     }
     case constants.USER_GET_SUCCESS: {
       return {
-        ...initialState,
+        ...state,
         fetchingUser: false,
         fetchingUserError: null,
         user: action.data,
@@ -35,7 +35,7 @@ export default (state = initialState, action) => {
     }
     case constants.USER_GET_FAIL: {
       return {
-        ...initialState,
+        ...state,
         fetchingUser: false,
         fetchingUserError: action.error,
         user: null,
@@ -46,14 +46,14 @@ export default (state = initialState, action) => {
 
     case constants.USER_UPDATE_REQUEST: {
       return {
-        ...initialState,
+        ...state,
         updatingUser: true,
         updatingUserError: null
       };
     }
     case constants.USER_UPDATE_SUCCESS: {
       return {
-        ...initialState,
+        ...state,
         // user: action.data,
         updatingUser: false,
         updatingUserError: null
@@ -62,14 +62,18 @@ export default (state = initialState, action) => {
 
     case constants.USER_UPDATE_FAIL: {
       return {
-        ...initialState,
+        ...state,
         updatingUser: false,
         updatingUserError: action.error
       };
     }
 
-
-
+    case 'LOGOUT_SUCCESS': {
+      return {
+        ...initialState,
+        fetchingUser: false
+      };
+    }
 
     default: {
       return state;

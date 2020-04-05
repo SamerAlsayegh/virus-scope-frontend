@@ -6,7 +6,7 @@ import { makeStyles } from '@material-ui/styles';
 import { Typography, Button } from '@material-ui/core';
 import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
 import axios from 'src/utils/axios';
-import ProjectCard from 'components/ProjectCard';
+import HospitalCard from 'components/HospitalCard';
 
 const useStyles = makeStyles((theme) => ({
   root: {},
@@ -76,7 +76,7 @@ function Projects({ className, ...rest }) {
         </Button>
       </div>
       {projects.map((project) => (
-        <ProjectCard
+        <HospitalCard
           key={project.id}
           project={project}
         />

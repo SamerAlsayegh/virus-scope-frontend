@@ -5,6 +5,8 @@ import clsx from 'clsx';
 import { makeStyles } from '@material-ui/styles';
 import { Typography, Grid, Button } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
+import AddPatientDialog from "../../../../components/Dialogs/AddPatientDialog";
+import AddHospitalDialog from "../../../../components/Dialogs/AddHospitalDialog";
 
 const useStyles = makeStyles((theme) => ({
   root: {},
@@ -33,25 +35,26 @@ function Header({ className, ...rest }) {
             gutterBottom
             variant="overline"
           >
-            Browse projects
+            Browse hospitals
           </Typography>
           <Typography
             component="h1"
             variant="h3"
           >
-            See the latest opportunities
+            Active Hospital Listings
           </Typography>
         </Grid>
         <Grid item>
-          <Button
-            color="primary"
-            component={RouterLink}
-            to="/projects/create"
-            variant="contained"
+          <AddHospitalDialog customOpenDialogElement={(handleClickOpen) => <Button
+              onClick={handleClickOpen}
+              color="primary"
+              variant="contained"
           >
             <AddIcon className={classes.addIcon} />
-            Submit project
-          </Button>
+            Add Hospital
+          </Button>}/>
+
+
         </Grid>
       </Grid>
     </div>

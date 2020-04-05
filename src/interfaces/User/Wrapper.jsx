@@ -15,6 +15,9 @@ const useStyles = makeStyles(theme => ({
             paddingTop: 56
         }
     },
+    pageLayout: {
+        padding: theme.spacing(2)
+    }
 }));
 
 
@@ -26,7 +29,7 @@ export default () => {
         <Grid item>
             <NavBar/>
         </Grid>
-        <Grid item xs>
+        <Grid item xs className={classes.pageLayout}>
             {renderRoutes(Router.map((route) => ({
                 ...route,
                 component: (props) => route.component({...props}),

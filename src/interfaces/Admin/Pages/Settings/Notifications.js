@@ -59,13 +59,13 @@ function Notifications({ className, ...rest }) {
                 gutterBottom
                 variant="h6"
               >
-                System
+                Patient
               </Typography>
               <Typography
                 gutterBottom
                 variant="body2"
               >
-                You will recieve emails in your business email address
+                You will receive emails about encounters
               </Typography>
               <FormControlLabel
                 control={(
@@ -117,13 +117,13 @@ function Notifications({ className, ...rest }) {
                 gutterBottom
                 variant="h6"
               >
-                Chat App
+                Hospital
               </Typography>
               <Typography
                 gutterBottom
                 variant="body2"
               >
-                You will recieve emails in your business email address
+                You will receive emails from your assigned hospital
               </Typography>
               <FormControlLabel
                 control={(

@@ -7,7 +7,7 @@ import ReactPaginate from 'react-paginate';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    ...theme.typography.button,
+    ...theme.typography.button, 
     listStyle: 'none',
     userSelect: 'none',
     display: 'flex',

@@ -8,12 +8,15 @@ import {makeStyles} from "@material-ui/core/styles";
 
 const useStyles = makeStyles(theme => ({
     container: {
-            [theme.breakpoints.up('lg')]: {
+        [theme.breakpoints.up('lg')]: {
             paddingLeft: 256
         },
+        [theme.breakpoints.down('xs')]: {
+            paddingTop: 56
+        }
     },
-    content: {
-        padding: 20
+    pageLayout: { 
+        padding: theme.spacing(2)
     }
 }));
 
@@ -26,7 +29,7 @@ export default () => {
         <Grid item>
             <NavBar/>
         </Grid>
-        <Grid item xs className={classes.content}>
+        <Grid item xs className={classes.pageLayout}>
             {renderRoutes(Router.map((route) => ({
                 ...route,
                 component: (props) => route.component({...props}),

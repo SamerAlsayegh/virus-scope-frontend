@@ -32,14 +32,19 @@ export default [
         icon: HomeIcon
       },
       {
+        title: 'Analytics',
+        href: '/analytics',
+        icon: HomeIcon
+      },
+      {
         title: 'Management',
         href: '/management',
         icon: BarChartIcon,
         items: [
-          {
-            title: 'New Hospital',
-            href: '/management/hospitals/new'
-          },
+          // {
+          //   title: 'New Hospital',
+          //   href: '/management/hospitals/new'
+          // },
           {
             title: 'Hospital List',
             href: '/management/hospitals',
@@ -55,10 +60,6 @@ export default [
           {
             title: 'General',
             href: '/settings/general'
-          },
-          {
-            title: 'Subscription',
-            href: '/settings/subscription'
           },
           {
             title: 'Notifications',

@@ -16,6 +16,8 @@ import {
   colors
 } from '@material-ui/core';
 import SuccessSnackbar from './SuccessSnackbar';
+import {updateUser} from "../../../../../redux/user/actions";
+import {useDispatch} from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
   root: {},
@@ -32,6 +34,7 @@ const stateOptions = ['Alabama', 'New York', 'San Francisco'];
 
 function GeneralSettings({ profile, className, ...rest }) {
   const classes = useStyles();
+  const dispatch = useDispatch();
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [values, setValues] = useState({
     name: profile.name,
@@ -52,6 +55,14 @@ function GeneralSettings({ profile, className, ...rest }) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    dispatch(updateUser({
+      name: values.name,
+      email: values.email,
+      currentPassword: values.currentPassword,
+      newPassword: values.newPassword,
+
+    }))
+    console.log(values);
     setOpenSnackbar(true);
   };
 

@@ -33,7 +33,7 @@ export default function InputDialog({customOpenDialogElement, maxWidth = 'md', t
         },
     });
 
-    console.log(formik.touched, formik.dirty);
+
 
     const handleClickOpen = () => {
         setOpen(true);

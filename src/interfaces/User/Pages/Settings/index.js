@@ -12,7 +12,6 @@ import {
 import Page from 'components/Page';
 import Header from './Header';
 import General from './General';
-import Subscription from './Subscription';
 import Notifications from './Notifications';
 import Security from './Security';
 
@@ -38,7 +37,6 @@ function Settings({ match, history }) {
   const { tab: currentTab } = match.params;
   const tabs = [
     { value: 'general', label: 'General' },
-    { value: 'subscription', label: 'Subscription' },
     { value: 'notifications', label: 'Notifications' },
     { value: 'security', label: 'Security' }
   ];
@@ -80,7 +78,6 @@ function Settings({ match, history }) {
         <Divider className={classes.divider} />
         <div className={classes.content}>
           {currentTab === 'general' && <General />}
-          {currentTab === 'subscription' && <Subscription />}
           {currentTab === 'notifications' && <Notifications />}
           {currentTab === 'security' && <Security />}
         </div>

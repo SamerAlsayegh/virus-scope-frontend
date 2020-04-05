@@ -40,22 +40,31 @@ function ProfileDetails({ profile, className, ...rest }) {
       className={clsx(classes.root, className)}
     >
       <CardContent className={classes.content}>
-        <Avatar
-          className={classes.avatar}
-          src={profile.avatar}
-        />
         <Typography
           className={classes.name}
           gutterBottom
           variant="h3"
         >
-          {`${profile.firstName} ${profile.lastName}`}
+          {`${profile.name}`}
+        </Typography>
+        <Typography
+            className={classes.name}
+            gutterBottom
+            variant="h5"
+        >
+          {`${profile.email}`}
+        </Typography>
+        <Typography
+            className={classes.name}
+            gutterBottom
+        >
+          {`${profile.scope}`}
         </Typography>
         <Typography
           color="textSecondary"
           variant="body1"
         >
-          {`${profile.state}, ${profile.country}`}
+          {`${profile.city}, ${profile.country}`}
         </Typography>
         <Typography
           color="textSecondary"

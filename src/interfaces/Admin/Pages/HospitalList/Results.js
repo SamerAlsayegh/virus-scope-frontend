@@ -15,7 +15,10 @@ import ViewModuleIcon from '@material-ui/icons/ViewModule';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import axios from 'utils/axios';
 import Paginate from 'components/Paginate';
-import ProjectCard from 'components/ProjectCard';
+import HospitalCard from 'components/HospitalCard';
+import {useDispatch, useSelector} from "react-redux";
+import {getPatients} from "../../../../redux/patients/actions";
+import {getHospitals} from "../../../../redux/hospitals/actions";
 
 const useStyles = makeStyles((theme) => ({
   root: {},
@@ -62,6 +65,19 @@ function Projects({ className, ...rest }) {
   const [mode, setMode] = useState('grid');
   const [projects, setProjects] = useState([]);
 
+  const dispatch = useDispatch();
+  const {hospitals} = useSelector(state => state.hospitals);
+
+  useEffect(() => {
+    let mounted = true;
+    dispatch(getHospitals())
+    return () => {
+      mounted = false;
+    };
+  }, []);
+
+
+
   const handleSortOpen = () => {
     setOpenSort(true);
   };
@@ -79,23 +95,6 @@ function Projects({ className, ...rest }) {
     setMode(value);
   };
 
-  useEffect(() => {
-    let mounted = true;
-
-    const fetchProjects = () => {
-      axios.get('/api/projects').then((response) => {
-        if (mounted) {
-          setProjects(response.data.projects);
-        }
-      });
-    };
-
-    fetchProjects();
-
-    return () => {
-      mounted = false;
-    };
-  }, []);
 
   return (
     <div
@@ -109,9 +108,9 @@ function Projects({ className, ...rest }) {
         >
           Showing
           {' '}
-          {projects.length}
+          {hospitals.length}
           {' '}
-          projects
+          hospitals
         </Typography>
         <div className={classes.actions}>
           <Button
@@ -138,15 +137,15 @@ function Projects({ className, ...rest }) {
         container
         spacing={3}
       >
-        {projects.map((project) => (
+        {hospitals.map((hospital) => (
           <Grid
             item
-            key={project.id}
+            key={hospital.id}
             md={mode === 'grid' ? 4 : 12}
             sm={mode === 'grid' ? 6 : 12}
             xs={12}
           >
-            <ProjectCard project={project} />
+            <HospitalCard hospital={hospital} />
           </Grid>
         ))}
       </Grid>
@@ -160,7 +159,7 @@ function Projects({ className, ...rest }) {
         open={openSort}
         elevation={1}
       >
-        {['Most recent', 'Popular', 'Price high', 'Price low', 'On sale'].map(
+        {['Most recent', 'Popular', 'Service count high', 'Service count low', 'Proximity'].map(
           (option) => (
             <MenuItem
               className={classes.menuItem}

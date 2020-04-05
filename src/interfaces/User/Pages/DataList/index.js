@@ -33,7 +33,7 @@ function DataList() {
   return (
     <Page
       className={classes.root}
-      title="Orders Management List"
+      title="Data List"
     >
       <Container
         maxWidth={false}

@@ -115,7 +115,7 @@ function Results({ className, orders, ...rest }) {
       <Card>
         <CardHeader
           action={<GenericMoreButton />}
-          title="Orders"
+          title="Data"
         />
         <Divider />
         <CardContent className={classes.content}>
@@ -135,11 +135,11 @@ function Results({ className, orders, ...rest }) {
                         onChange={handleSelectAll}
                       />
                     </TableCell>
-                    <TableCell>Ref</TableCell>
-                    <TableCell>Customer</TableCell>
-                    <TableCell>Method</TableCell>
-                    <TableCell>Total</TableCell>
-                    <TableCell>Status</TableCell>
+                    <TableCell>Date</TableCell>
+                    <TableCell>Time</TableCell>
+                    <TableCell>Latitude</TableCell>
+                    <TableCell>Longitude</TableCell>
+                    <TableCell>Duration</TableCell>
                     <TableCell align="right">Actions</TableCell>
                   </TableRow>
                 </TableHead>

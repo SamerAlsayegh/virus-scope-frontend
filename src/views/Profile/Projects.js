@@ -4,7 +4,7 @@ import clsx from 'clsx';
 import { makeStyles } from '@material-ui/styles';
 import { Grid } from '@material-ui/core';
 import axios from 'src/utils/axios';
-import ProjectCard from 'components/ProjectCard';
+import HospitalCard from 'components/HospitalCard';
 
 const useStyles = makeStyles(() => ({
   root: {}
@@ -50,7 +50,7 @@ function Projects({ className, ...rest }) {
             md={6}
             xs={12}
           >
-            <ProjectCard project={project} />
+            <HospitalCard project={project} />
           </Grid>
         ))}
       </Grid>

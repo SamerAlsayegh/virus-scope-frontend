@@ -19,17 +19,17 @@ export default (state = initialState, action) => {
   switch (action.type) {
     case constants.LOGIN_REQUEST: {
       return {
-        ...initialState
+        ...state
       };
     }
     case constants.LOGIN_SUCCESS: {
       return {
-        ...initialState
+        ...state
       };
     }
     case constants.LOGIN_FAIL: {
       return {
-        ...initialState
+        ...state
       };
     }
 
@@ -37,18 +37,18 @@ export default (state = initialState, action) => {
 
     case constants.LOGOUT_REQUEST: {
       return {
-        ...initialState
+        ...state
       };
     }
     case constants.LOGOUT_SUCCESS: {
       return {
-        ...initialState
+        ...state
       };
     }
 
     case constants.LOGOUT_FAIL: {
       return {
-        ...initialState
+        ...state
       };
     }
 

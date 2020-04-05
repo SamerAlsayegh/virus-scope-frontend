@@ -52,10 +52,6 @@ export default [
         icon: BarChartIcon,
         items: [
           {
-            title: 'New Patient',
-            href: '/management/patients/new'
-          },
-          {
             title: 'Patients List',
             href: '/management/patients',
             label: () => <Label color={colors.blue['500']}>100</Label>

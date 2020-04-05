@@ -10,7 +10,7 @@ import {
   colors
 } from '@material-ui/core';
 import Page from 'components/Page';
-import ProjectCard from 'components/ProjectCard';
+import HospitalCard from 'components/HospitalCard';
 import ReviewCard from 'src/views/Profile/Reviews/ReviewCard';
 import ListCard from './ListCard';
 import DismissCard from './DismissCard';
@@ -68,7 +68,7 @@ function Cards() {
             item
             xs={12}
           >
-            <ProjectCard
+            <HospitalCard
               project={{
                 id: uuid(),
                 title: 'Develop a PDF Editor',

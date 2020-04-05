@@ -26,6 +26,7 @@ import {configureStore} from "./store";
 import Grid from "@material-ui/core/Grid";
 import {LinearProgress} from "@material-ui/core";
 import TopBar from "./TopBar";
+import MainPage from "./MainPage";
 
 
 const useStyles = makeStyles(theme => ({
@@ -66,26 +67,11 @@ validate.validators = {
 export default function App() {
     const classes = useStyles();
     const store = configureStore();
-
     return (<div className={classes.root}>
         <BrowserRouter>
             <StoreProvider store={store}>
                 <ThemeProvider theme={theme}>
-                    <TopBar/>
-
-                    <div className={classes.container}>
-                        <div className={classes.content}>
-                            <Suspense fallback={<LinearProgress />}>
-                                {renderRoutes(Routes.map((route) => ({
-                                    ...route,
-                                    component: (props) => route.component(props),
-                                })))}
-                            </Suspense>
-                        </div>
-                    </div>
-                    {/*<div style={{marginTop: 65}} className={classes.layout}>*/}
-
-                    {/*</div>*/}
+                    <MainPage/>
                 </ThemeProvider>
             </StoreProvider>
         </BrowserRouter>
